@@ -25,3 +25,30 @@ Citizen.CreateThread(function()
         end)
     end
 end)
+
+-- Scripting 3
+Citizen.CreateThread(function()
+    while true do
+
+        local playerPed = PlayerPedId()
+        local playerCoords = GetEntityCoords(playerPed)
+        local distance = Vdist(playerCoords, Config.Destination.x, Config.Destination.y, Config.Destination.z)
+
+        if IsControlJustReleased(0, 38) then
+            if distance < 3.0 then
+                ShowNotification('ja')
+            else
+                ShowNotification('nein')
+            end
+        end
+
+        Citizen.Wait(1)
+
+    end
+end)
+
+function ShowNotification(text)
+	SetNotificationTextEntry('STRING')
+    AddTextComponentString(text)
+	DrawNotification(false, true)
+end
