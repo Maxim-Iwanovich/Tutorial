@@ -108,3 +108,28 @@ function ShowNotification(text)
     AddTextComponentString(text)
 	DrawNotification(false, true)
 end
+
+-- Scripting 4
+
+-- /broadcast dwa dwa wda dwa dwa
+RegisterCommand('broadcast', function(source, args, raw)
+    local finalString = ''
+    for i=1, #args, 1 do 
+        finalString = finalString .. ' ' .. args[i]
+    end
+
+    TriggerServerEvent('bc:get', finalString)
+end, false)
+
+RegisterNetEvent('bc:send')
+AddEventHandler('bc:send', function(finalString)
+
+    ShowNotification(finalString)
+
+end)
+
+function ShowNotification(text)
+	SetNotificationTextEntry('STRING')
+    AddTextComponentString(text)
+	DrawNotification(false, true)
+end
